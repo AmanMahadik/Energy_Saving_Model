@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Energy Saving Model",
+    "slug": "frontend",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/energylogo.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/energylogo.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#E0F7FA",
+      "duration": 500
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aman1611.frontend",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/energylogo.png",
+        "backgroundColor": "#87CEEB"
+      },
+      "package": "com.aman1611.frontend"
+    },
+    "web": {
+      "favicon": "./assets/energylogo.png"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3866f45c-a5dc-4b85-84a0-5743e2028bb0"
+      }
+    }
+  }
+}
