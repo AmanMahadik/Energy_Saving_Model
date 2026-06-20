@@ -154,27 +154,27 @@ const ProfileScreen = () => {
                   <View style={styles.webMetricsRow}>
                     <View style={styles.webMetricBox}>
                       <Ionicons name="flash-outline" size={24} color="#4F46E5" />
-                      <Text style={styles.webMetricValue}>{energyData.dailyConsumption.toFixed(2)}</Text>
+                      <Text style={styles.webMetricValue}>{(energyData.dailyConsumption || 0).toFixed(2)}</Text>
                       <Text style={styles.webMetricLabel}>Daily kWh Use</Text>
                     </View>
                     <View style={styles.webMetricBox}>
                       <Ionicons name="calendar-outline" size={24} color="#10B981" />
-                      <Text style={styles.webMetricValue}>{energyData.monthlyConsumption.toFixed(2)}</Text>
+                      <Text style={styles.webMetricValue}>{(energyData.monthlyConsumption || 0).toFixed(2)}</Text>
                       <Text style={styles.webMetricLabel}>Monthly kWh Use</Text>
                     </View>
                   </View>
-
+ 
                   <View style={styles.webCostSection}>
                     <View style={styles.webCostHeader}>
                       <Ionicons name="wallet-outline" size={20} color="#10B981" />
                       <Text style={styles.webCostTitle}>Calculated Cost (Tiered INR)</Text>
                     </View>
                     <Text style={styles.webCostValue}>
-                      ₹{((energyData.dailyConsumption * 30) <= 100 
-                        ? (energyData.dailyConsumption * 30) * 3.45 
-                        : (energyData.dailyConsumption * 30) <= 300 
-                        ? 100 * 3.45 + ((energyData.dailyConsumption * 30) - 100) * 5.5 
-                        : 100 * 3.45 + 200 * 5.5 + ((energyData.dailyConsumption * 30) - 300) * 7.5).toFixed(2)}
+                      ₹{(((energyData.dailyConsumption || 0) * 30) <= 100 
+                        ? ((energyData.dailyConsumption || 0) * 30) * 3.45 
+                        : ((energyData.dailyConsumption || 0) * 30) <= 300 
+                        ? 100 * 3.45 + (((energyData.dailyConsumption || 0) * 30) - 100) * 5.5 
+                        : 100 * 3.45 + 200 * 5.5 + (((energyData.dailyConsumption || 0) * 30) - 300) * 7.5).toFixed(2)}
                     </Text>
                     <Text style={styles.webCostNote}>
                       Uses tiered tariff model: ₹3.45/kWh (first 100), ₹5.50/kWh (101-300), ₹7.50/kWh (>300).
@@ -243,14 +243,14 @@ const ProfileScreen = () => {
             <View style={styles.energyStatsContainer}>
               <View style={styles.energyStat}>
                 <Text style={styles.energyValue}>
-                  {energyData.dailyConsumption.toFixed(2)}
+                  {(energyData.dailyConsumption || 0).toFixed(2)}
                 </Text>
                 <Text style={styles.energyLabel}>kWh/day</Text>
               </View>
               <View style={styles.verticalDivider} />
               <View style={styles.energyStat}>
                 <Text style={styles.energyValue}>
-                  {energyData.monthlyConsumption.toFixed(2)}
+                  {(energyData.monthlyConsumption || 0).toFixed(2)}
                 </Text>
                 <Text style={styles.energyLabel}>kWh/month</Text>
               </View>
@@ -259,11 +259,11 @@ const ProfileScreen = () => {
             <View style={styles.estimateContainer}>
               <Text style={styles.estimateLabel}>Estimated Cost (Tiered INR):</Text>
               <Text style={styles.estimateValue}>
-                ₹{((energyData.monthlyConsumption) <= 100 
-                  ? (energyData.monthlyConsumption) * 3.45 
-                  : (energyData.monthlyConsumption) <= 300 
-                  ? 100 * 3.45 + ((energyData.monthlyConsumption) - 100) * 5.5 
-                  : 100 * 3.45 + 200 * 5.5 + ((energyData.monthlyConsumption) - 300) * 7.5).toFixed(2)}
+                ₹{(((energyData.monthlyConsumption || 0)) <= 100 
+                  ? ((energyData.monthlyConsumption || 0)) * 3.45 
+                  : ((energyData.monthlyConsumption || 0)) <= 300 
+                  ? 100 * 3.45 + (((energyData.monthlyConsumption || 0)) - 100) * 5.5 
+                  : 100 * 3.45 + 200 * 5.5 + (((energyData.monthlyConsumption || 0)) - 300) * 7.5).toFixed(2)}
               </Text>
               <Text style={styles.estimateNote}>
                 Calculated dynamically based on tiered energy slabs

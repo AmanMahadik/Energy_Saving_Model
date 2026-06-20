@@ -166,10 +166,10 @@ const LeaderboardScreen = () => {
         
         <View style={styles.statsCell}>
           <Text style={styles.savingsText}>
-            {item.savingsPercentage}% saved
+            {item.savingsPercentage || 0}% saved
           </Text>
           <Text style={styles.savedEnergyText}>
-            {item.energySaved.toFixed(1)} kWh
+            {(item.energySaved || 0).toFixed(1)} kWh
           </Text>
         </View>
       </Animated.View>
@@ -280,8 +280,8 @@ const LeaderboardScreen = () => {
                       {getBadgeIcon(item.badge)}
                       <Text style={styles.webBadgeLabel}>{item.badge}</Text>
                     </View>
-                    <Text style={styles.webColSavingsVal}>{item.savingsPercentage}%</Text>
-                    <Text style={styles.webColKwhVal}>{item.energySaved.toFixed(1)} kWh/m</Text>
+                    <Text style={styles.webColSavingsVal}>{item.savingsPercentage || 0}%</Text>
+                    <Text style={styles.webColKwhVal}>{(item.energySaved || 0).toFixed(1)} kWh/m</Text>
                   </View>
                 );
               })}

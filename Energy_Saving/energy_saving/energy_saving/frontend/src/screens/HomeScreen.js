@@ -109,7 +109,18 @@ const HomeScreenContent = ({ navigation }) => {
                 headers: { "x-auth-token": user.token },
             });
             if (summaryResponse.data.summary) {
-                setEnergySummary(summaryResponse.data.summary);
+                const summary = summaryResponse.data.summary;
+                const monthlyTotal = summary.monthlyConsumption || 0;
+                let estimatedBill = 0;
+                if (monthlyTotal <= 100) {
+                    estimatedBill = monthlyTotal * 3.45;
+                } else if (monthlyTotal <= 300) {
+                    estimatedBill = 100 * 3.45 + (monthlyTotal - 100) * 5.5;
+                } else {
+                    estimatedBill = 100 * 3.45 + 200 * 5.5 + (monthlyTotal - 300) * 7.5;
+                }
+                summary.estimatedBill = estimatedBill;
+                setEnergySummary(summary);
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
@@ -165,7 +176,18 @@ const HomeScreenContent = ({ navigation }) => {
                 { headers: { "x-auth-token": user.token, "Content-Type": "application/json" } }
             );
             if (response.data.success && response.data.summary) {
-                setEnergySummary(response.data.summary);
+                const summary = response.data.summary;
+                const monthlyTotal = summary.monthlyConsumption || 0;
+                let estimatedBill = 0;
+                if (monthlyTotal <= 100) {
+                    estimatedBill = monthlyTotal * 3.45;
+                } else if (monthlyTotal <= 300) {
+                    estimatedBill = 100 * 3.45 + (monthlyTotal - 100) * 5.5;
+                } else {
+                    estimatedBill = 100 * 3.45 + 200 * 5.5 + (monthlyTotal - 300) * 7.5;
+                }
+                summary.estimatedBill = estimatedBill;
+                setEnergySummary(summary);
                 Alert.alert("Success", "Your energy data has been saved");
             } else {
                 Alert.alert("Error", response.data.message || "Failed to save data");
@@ -311,17 +333,17 @@ const HomeScreenContent = ({ navigation }) => {
                                 <Text style={styles.webSummaryTitle}>Energy Overview</Text>
                                 <View style={styles.webMetricGrid}>
                                     <View style={styles.webMetricCard}>
-                                        <Text style={styles.webMetricVal}>{energySummary.dailyConsumption.toFixed(2)}</Text>
+                                        <Text style={styles.webMetricVal}>{(energySummary.dailyConsumption || 0).toFixed(2)}</Text>
                                         <Text style={styles.webMetricLabel}>Daily kWh</Text>
                                     </View>
                                     <View style={styles.webMetricCard}>
-                                        <Text style={styles.webMetricVal}>{energySummary.monthlyConsumption.toFixed(2)}</Text>
+                                        <Text style={styles.webMetricVal}>{(energySummary.monthlyConsumption || 0).toFixed(2)}</Text>
                                         <Text style={styles.webMetricLabel}>Monthly kWh</Text>
                                     </View>
                                 </View>
                                 <View style={styles.webBillSection}>
                                     <Text style={styles.webBillTitle}>Estimated Monthly Cost</Text>
-                                    <Text style={styles.webBillVal}>₹ {energySummary.estimatedBill.toFixed(2)}</Text>
+                                    <Text style={styles.webBillVal}>₹ {(energySummary.estimatedBill || 0).toFixed(2)}</Text>
                                     <Text style={styles.webBillSub}>Calculated dynamically based on tiered energy slabs</Text>
                                 </View>
                             </View>
@@ -409,18 +431,18 @@ const HomeScreenContent = ({ navigation }) => {
                     <Text style={styles.mobileSummaryTitle}>Power Usage Overview</Text>
                     <View style={styles.mobileMetricsRow}>
                         <View style={styles.mobileMetricItem}>
-                            <Text style={styles.mobileMetricValue}>{energySummary.dailyConsumption.toFixed(2)}</Text>
+                            <Text style={styles.mobileMetricValue}>{(energySummary.dailyConsumption || 0).toFixed(2)}</Text>
                             <Text style={styles.mobileMetricUnit}>kWh / Day</Text>
                         </View>
                         <View style={styles.mobileDivider} />
                         <View style={styles.mobileMetricItem}>
-                            <Text style={styles.mobileMetricValue}>{energySummary.monthlyConsumption.toFixed(2)}</Text>
+                            <Text style={styles.mobileMetricValue}>{(energySummary.monthlyConsumption || 0).toFixed(2)}</Text>
                             <Text style={styles.mobileMetricUnit}>kWh / Month</Text>
                         </View>
                     </View>
                     <View style={styles.mobileBillWrapper}>
                         <Text style={styles.mobileBillLabel}>Est. Bill Cost: </Text>
-                        <Text style={styles.mobileBillVal}>₹ {energySummary.estimatedBill.toFixed(2)}</Text>
+                        <Text style={styles.mobileBillVal}>₹ {(energySummary.estimatedBill || 0).toFixed(2)}</Text>
                     </View>
                 </View>
 
