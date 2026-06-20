@@ -17,6 +17,9 @@ const getApiUrl = () => {
   }
 
   // Fallback for web or standalone production build
+  if (Platform.OS === 'web' && !global.__DEV__) {
+    return 'https://energy-saving-backend.onrender.com';
+  }
   return 'http://localhost:3000';
 };
 
