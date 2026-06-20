@@ -11,6 +11,8 @@ obj/
 # Expo / React Native local directories
 .expo/
 web-build/
+**/android/
+**/ios/
 
 # Local SQLite files
 *.sqlite
