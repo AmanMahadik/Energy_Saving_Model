@@ -12,13 +12,19 @@
       "android": {
         "buildType": "apk"
       },
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://energy-saving-backend.onrender.com"
+      }
     },
     "production": {
       "android": {
         "buildType": "apk"
       },
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://energy-saving-backend.onrender.com"
+      }
     }
   },
   "submit": {
