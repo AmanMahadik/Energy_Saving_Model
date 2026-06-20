@@ -596,8 +596,8 @@ const BottomNavigation = () => {
                     borderTopWidth: 1,
                     borderTopColor: '#E2E8F0',
                     backgroundColor: '#FFFFFF',
-                    height: Platform.OS === 'web' ? 0 : 60, // Hide bottom tab bar on desktop web
-                    display: Platform.OS === 'web' && Dimensions.get('window').width > 768 ? 'none' : 'flex'
+                    height: 60,
+                    display: 'flex'
                 }
             })}
         >
