@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "postinstall": "npm rebuild sqlite3",
-    "dev": "concurrently \"nodemon backend/index.js\" \"expo start\""
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

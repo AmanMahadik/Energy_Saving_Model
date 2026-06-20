@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path'); // Added path module
 const authRoutes = require('./src/routes/auth');
 const energyRoutes = require('./src/routes/energy');
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,9 +24,21 @@ app.use(cors({
 // Body parser
 app.use(express.json());
 
+// Serve static public folder for HTML pages
+app.use(express.static(path.join(__dirname, 'src', 'public')));
+
 // Test route for basic connectivity check
 app.get('/test', (req, res) => {
   res.json({ message: 'Test endpoint is working!' });
+});
+
+// Password reset GET routes to serve reset-password.html
+app.get('/reset', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src', 'public', 'reset-password.html'));
+});
+
+app.get('/reset-password/:token', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src', 'public', 'reset-password.html'));
 });
 
 // Main routes
