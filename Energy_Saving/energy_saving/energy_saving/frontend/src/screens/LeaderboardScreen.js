@@ -169,7 +169,7 @@ const LeaderboardScreen = () => {
             {item.savingsPercentage || 0}% saved
           </Text>
           <Text style={styles.savedEnergyText}>
-            {(item.energySaved || 0).toFixed(1)} kWh
+            {(Number(item.energySaved) || 0).toFixed(1)} kWh
           </Text>
         </View>
       </Animated.View>
@@ -234,7 +234,7 @@ const LeaderboardScreen = () => {
         <View style={styles.webInfoCard}>
           <Ionicons name="information-circle" size={24} color="#3B82F6" />
           <Text style={styles.webInfoText}>
-            Our community average energy consumption is <Text style={{ fontWeight: 'bold' }}>{averageConsumption.toFixed(2)} kWh</Text> per month. Add and optimize your appliances to save more and climb the leaderboard!
+            Our community average energy consumption is <Text style={{ fontWeight: 'bold' }}>{(Number(averageConsumption) || 0).toFixed(2)} kWh</Text> per month. Add and optimize your appliances to save more and climb the leaderboard!
           </Text>
         </View>
 
@@ -281,7 +281,7 @@ const LeaderboardScreen = () => {
                       <Text style={styles.webBadgeLabel}>{item.badge}</Text>
                     </View>
                     <Text style={styles.webColSavingsVal}>{item.savingsPercentage || 0}%</Text>
-                    <Text style={styles.webColKwhVal}>{(item.energySaved || 0).toFixed(1)} kWh/m</Text>
+                    <Text style={styles.webColKwhVal}>{(Number(item.energySaved) || 0).toFixed(1)} kWh/m</Text>
                   </View>
                 );
               })}
@@ -308,7 +308,7 @@ const LeaderboardScreen = () => {
       <View style={styles.infoCard}>
         <Ionicons name="information-circle-outline" size={20} color="#4F46E5" style={{ marginRight: 8 }} />
         <Text style={styles.infoText}>
-          Average monthly use: {averageConsumption.toFixed(1)} kWh. Save more to rank higher!
+          Average monthly use: {(Number(averageConsumption) || 0).toFixed(1)} kWh. Save more to rank higher!
         </Text>
       </View>
 
@@ -538,10 +538,12 @@ const styles = StyleSheet.create({
 
   // --- WEB STYLES ---
   webContainer: {
+    flex: 1,
     padding: 40,
     maxWidth: 1200,
     width: "100%",
     alignSelf: "center",
+    backgroundColor: '#F1F5F9',
   },
   webLeaderboardHeader: {
     flexDirection: 'row',
@@ -611,6 +613,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   webTableCard: {
+    flex: 1,
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
     boxShadow: '0px 4px 20px rgba(0,0,0,0.05)',
