@@ -1,9 +1,10 @@
-# Render Blueprint configuration for Energy Saving Backend
+# Render Blueprint configuration for Energy Saving Backend (at repository root)
 services:
   - type: web
     name: energy-saving-backend
     env: node
     plan: free
+    rootDir: Energy_Saving/energy_saving/energy_saving/backend
     buildCommand: npm install
     startCommand: npm start
     envVars:
